@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Online Bookstore</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/register.css" />
 </head>
 <body>
     <div class="container">
