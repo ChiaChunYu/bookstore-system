@@ -28,16 +28,14 @@
         <?php
         session_start();
 
-        // 檢查用戶是否已經登入
         if (!isset($_SESSION['user_id'])) {
             header('Location: login.php');
             exit();
         }
 
-        // 連接資料庫
         $host = 'localhost';
         $user = 'root';
-        $password = '411021390';  // 請替換為您的 MySQL 密碼
+        $password = '411021390'; 
         $database = 'OnlineBookstore';
         $port = 3307;
 
@@ -50,7 +48,6 @@
         $user_id = $_SESSION['user_id'];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // 檢查當前密碼是否正確
             $current_password = $_POST['current_password'];
             $query = "SELECT Password FROM User WHERE UserID = ?";
             $stmt = $conn->prepare($query);
@@ -61,7 +58,6 @@
             $stmt->close();
 
             if (password_verify($current_password, $hashed_password)) {
-                // 更新用戶資料
                 if (!empty($_POST['name'])) {
                     $name = $_POST['name'];
                     $query = "UPDATE User SET Name = ? WHERE UserID = ?";
@@ -96,7 +92,6 @@
             }
         }
 
-        // 獲取用戶資料
         $query = "SELECT Name, Account, Address FROM User WHERE UserID = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $user_id);

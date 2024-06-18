@@ -11,6 +11,8 @@
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
     <a href="profile.php">Profile</a>
+    <a href="cart.php">Cart</a>
+    <a href="order.php">Order</a>
 </body>
 
 </html>
