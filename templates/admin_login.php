@@ -47,12 +47,14 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Online Bookstore</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="/static/admin_login.css" />
 </head>
+
 <body>
     <div class="container">
         <h1>Admin Login</h1>
@@ -65,4 +67,5 @@ $conn->close();
         </form>
     </div>
 </body>
+
 </html>
