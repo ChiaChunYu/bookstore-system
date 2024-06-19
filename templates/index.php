@@ -99,7 +99,8 @@ $conn->close();
         <?php if (isset($_SESSION['admin_id'])): ?>
             <p>Welcome, Admin! <a href="logout.php">Logout</a></p>
             <nav>
-                <a href="admin_interface.php">Admin Interface</a>
+                <a href="admin_interface.php">Admin Interface</a> | 
+                <a href="admin_order.php">View Orders</a>
             </nav>
         <?php elseif (isset($_SESSION['user_id'])): ?>
             <p>Welcome, User! <a href="logout.php">Logout</a></p>
