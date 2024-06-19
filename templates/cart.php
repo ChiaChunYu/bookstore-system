@@ -31,11 +31,30 @@ if (isset($_POST['remove_item'])) {
 
 if (isset($_POST['increase_quantity'])) {
     $book_id = $_POST['increase_quantity'];
-    $query = "UPDATE OrderItem SET Quantity = Quantity + 1 WHERE OrderID = (SELECT OrderID FROM `Order` WHERE UserID = ? AND OrderStatus = 'Pending') AND BookID = ?";
+
+    $query = "SELECT StockQuantity FROM Book WHERE BookID = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $book_id);
+    $stmt->execute();
+    $stmt->bind_result($stock_quantity);
+    $stmt->fetch();
+    $stmt->close();
+
+    $query = "SELECT Quantity FROM OrderItem WHERE OrderID = (SELECT OrderID FROM `Order` WHERE UserID = ? AND OrderStatus = 'Pending') AND BookID = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ii', $user_id, $book_id);
     $stmt->execute();
+    $stmt->bind_result($current_quantity);
+    $stmt->fetch();
     $stmt->close();
+
+    if ($current_quantity < $stock_quantity) {
+        $query = "UPDATE OrderItem SET Quantity = Quantity + 1 WHERE OrderID = (SELECT OrderID FROM `Order` WHERE UserID = ? AND OrderStatus = 'Pending') AND BookID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ii', $user_id, $book_id);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 
 if (isset($_POST['decrease_quantity'])) {
@@ -86,21 +105,44 @@ if (isset($_POST['confirm_order'])) {
         $stmt->execute();
         $result = $stmt->get_result();
 
+        $can_confirm_order = true;
+
         while ($row = $result->fetch_assoc()) {
-            $query = "UPDATE Book SET StockQuantity = StockQuantity - ? WHERE BookID = ?";
+            $query = "SELECT StockQuantity FROM Book WHERE BookID = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('ii', $row['Quantity'], $row['BookID']);
+            $stmt->bind_param('i', $row['BookID']);
             $stmt->execute();
+            $stmt->bind_result($stock_quantity);
+            $stmt->fetch();
+            $stmt->close();
+
+            if ($row['Quantity'] > $stock_quantity) {
+                echo "<p style='color: red;'>Not enough stock for book ID " . htmlspecialchars($row['BookID']) . ". Please adjust your cart.</p>";
+                $can_confirm_order = false;
+                break;
+            }
         }
 
-        $query = "UPDATE `Order` SET OrderStatus = 'Processing', TotalPrice = ? WHERE OrderID = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('di', $total_price, $order_id);
-        $stmt->execute();
+        if ($can_confirm_order) {
+            $result->data_seek(0);
 
-        echo "<p style='color: green;'>Order confirmed. Thank you for your purchase!</p>";
+            while ($row = $result->fetch_assoc()) {
+                $query = "UPDATE Book SET StockQuantity = StockQuantity - ? WHERE BookID = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ii', $row['Quantity'], $row['BookID']);
+                $stmt->execute();
+            }
+
+            $query = "UPDATE `Order` SET OrderStatus = 'Processing', TotalPrice = ? WHERE OrderID = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('di', $total_price, $order_id);
+            $stmt->execute();
+
+            echo "<p style='color: green;'>Order confirmed. Thank you for your purchase!</p>";
+        }
     }
 }
+
 
 $conn->close();
 ?>
@@ -110,7 +152,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - Online Bookstore</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="/static/cart.css" />
 </head>
 <body>

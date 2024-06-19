@@ -37,16 +37,16 @@ th {
 
 button {
     padding: 5px 10px;
-    background-color: #5cb85c;
+    background-color: #888;
     border: none;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 0 5px;
+    margin: 5px 5px;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: #555;
 }
 
 #confirmOrder {
