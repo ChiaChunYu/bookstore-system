@@ -41,6 +41,15 @@ $result = $conn->query($query);
             <p>Please <a href="login.php">Login</a> or <a href="register.php">Register</a></p>
         <?php endif; ?>
         
+        <?php if (isset($_SESSION['admin_id'])): ?>
+            <p>Welcome, Admin! <a href="admin_logout.php">Logout</a></p>
+            <nav>
+                <a href="admin_interface.php">Admin Interface</a>
+            </nav>
+        <?php else: ?>
+            <p><a href="admin_login.php">Admin Login</a></p>
+        <?php endif; ?>
+        
         <h2>Available Books</h2>
         <?php if ($result->num_rows > 0): ?>
             <div class="books">
