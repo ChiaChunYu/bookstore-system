@@ -13,7 +13,7 @@ body {
     padding: 20px 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 400px;
     width: 100%;
 }
 
@@ -23,15 +23,9 @@ h1 {
     margin-bottom: 20px;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
 form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 }
 
 label {
@@ -40,9 +34,7 @@ label {
 }
 
 input[type="text"],
-input[type="number"],
-input[type="password"],
-select {
+input[type="password"] {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -68,16 +60,7 @@ input[type="submit"]:hover {
 p {
     text-align: center;
     margin-top: 10px;
-}
-
-p a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-p a:hover {
-    color: #0056b3;
+    color: red;
 }
 
 @media (max-width: 600px) {
@@ -85,14 +68,12 @@ p a:hover {
         padding: 15px 30px;
     }
 
-    h1, h2 {
+    h1 {
         font-size: 24px;
     }
 
     input[type="text"],
-    input[type="number"],
     input[type="password"],
-    select,
     input[type="submit"] {
         font-size: 14px;
     }
