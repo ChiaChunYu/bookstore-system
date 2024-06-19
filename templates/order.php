@@ -22,7 +22,7 @@ $user_id = $_SESSION['user_id'];
 $query = "SELECT `Order`.OrderID, `Order`.OrderDate, `Order`.OrderStatus, Book.Title, Book.Price, OrderItem.Quantity FROM `Order`
           JOIN OrderItem ON `Order`.OrderID = OrderItem.OrderID
           JOIN Book ON OrderItem.BookID = Book.BookID
-          WHERE `Order`.UserID = ?
+          WHERE `Order`.UserID = ? AND `Order`.OrderStatus = 'Processing'
           ORDER BY `Order`.OrderDate DESC";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $user_id);
@@ -81,7 +81,7 @@ $conn->close();
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>You have no orders.</p>
+            <p>You have no processing orders.</p>
         <?php endif; ?>
     </div>
 </body>

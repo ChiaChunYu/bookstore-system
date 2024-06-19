@@ -13,7 +13,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 $search_query = "";
 if (isset($_GET['search'])) {
     $search_query = $_GET['search'];
@@ -97,7 +96,12 @@ $conn->close();
 <body>
     <div class="container">
         <h1>Online Bookstore</h1>
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['admin_id'])): ?>
+            <p>Welcome, Admin! <a href="logout.php">Logout</a></p>
+            <nav>
+                <a href="admin_interface.php">Admin Interface</a>
+            </nav>
+        <?php elseif (isset($_SESSION['user_id'])): ?>
             <p>Welcome, User! <a href="logout.php">Logout</a></p>
             <nav>
                 <a href="cart.php">Cart</a> | 
