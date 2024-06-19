@@ -18,7 +18,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// 更新訂單狀態
 if (isset($_POST['update_status'])) {
     $order_id = $_POST['order_id'];
     $new_status = 'Completed';
@@ -73,7 +72,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Orders - Online Bookstore</title>
+    <title>Admin Orders</title>
     <link rel="stylesheet" href="/static/admin_order.css" />
 </head>
 <body>

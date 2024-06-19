@@ -41,3 +41,16 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
+button {
+    padding: 10px 20px;
+    background-color: #888;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
