@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-// 連接資料庫
 $host = 'localhost';
 $user = 'root';
-$password = '411021390';  // 請替換為您的 MySQL 密碼
+$password = '411021390'; 
 $database = 'OnlineBookstore';
 $port = 3307;
 
@@ -14,7 +13,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// 獲取所有書籍的資料
 $query = "SELECT BookID, Title, Author, Genre, ISBN, Price, StockQuantity FROM Book";
 $result = $conn->query($query);
 ?>

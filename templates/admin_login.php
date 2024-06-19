@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-// 連接資料庫
 $host = 'localhost';
 $user = 'root';
-$password = '411021390';  // 請替換為您的 MySQL 密碼
+$password = '411021390';  
 $database = 'OnlineBookstore';
 $port = 3307;
 
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $admin_account = $_POST['admin_account'];
     $admin_password = $_POST['admin_password'];
 
-    // 假設 admin 表有 account 和 password 欄位
+   
     $query = "SELECT AdminID, Password FROM Admin WHERE Account = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('s', $admin_account);
@@ -30,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->fetch();
 
         if ($admin_password === $stored_password) {
-            // 登入成功
             $_SESSION['admin_id'] = $admin_id;
-            header('Location: admin_interface.php');
+            header('Location: index.php');
             exit();
         } else {
             echo "<p style='color: red;'>Incorrect password.</p>";
