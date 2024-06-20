@@ -97,23 +97,23 @@ $conn->close();
     <div class="container">
         <h1>Online Bookstore</h1>
         <?php if (isset($_SESSION['admin_id'])): ?>
-            <p>Welcome, Admin! <a href="logout.php">Logout</a></p>
             <nav>
                 <a href="admin_interface.php">Admin Interface</a> | 
-                <a href="admin_order.php">View Orders</a>
+                <a href="admin_order.php">View Orders</a> |
+                <a href="logout.php">Logout</a>
             </nav>
         <?php elseif (isset($_SESSION['user_id'])): ?>
-            <p>Welcome, User! <a href="logout.php">Logout</a></p>
             <nav>
                 <a href="cart.php">Cart</a> | 
+                <a href="order.php">Orders</a> |
                 <a href="profile.php">Profile</a> | 
-                <a href="order.php">Orders</a>
+                <a href="logout.php">Logout</a>
             </nav>
         <?php else: ?>
             <nav>
-                <button onclick="location.href='login.php'">User Login</button>
-                <button onclick="location.href='register.php'">Register</button>
-                <button onclick="location.href='admin_login.php'">Admin Login</button>
+                <a href="login.php">User Login</a> | 
+                <a href="register.php">Register</a> | 
+                <a href="admin_login.php">Admin Login</a>
             </nav>
         <?php endif; ?>
 

@@ -26,7 +26,7 @@ nav {
 nav a, nav button {
     margin: 0 10px;
     text-decoration: none;
-    color: #5cb85c;
+    color: #888;
     font-weight: bold;
     background: none;
     border: none;
@@ -36,7 +36,7 @@ nav a, nav button {
 }
 
 nav a:hover, nav button:hover {
-    color: #4cae4c;
+    color: #555;
 }
 
 form {
@@ -52,7 +52,7 @@ form input[type="text"] {
 
 form input[type="submit"] {
     padding: 10px 20px;
-    background-color: #5cb85c;
+    background-color: #888;
     border: none;
     color: white;
     cursor: pointer;
@@ -60,7 +60,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #4cae4c;
+    background-color: #555;
 }
 
 .books {
@@ -86,15 +86,31 @@ form input[type="submit"]:hover {
     margin: 10px 0;
 }
 
-button {
+.book form input[type="submit"] {
     padding: 10px 20px;
-    background-color: #5cb85c;
+    background-color: #888;
     border: none;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #4cae4c;
+.book form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+nav a, nav button, .link-button {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #888;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: color 0.3s;
+}
+
+nav a:hover, nav button:hover, .link-button:hover {
+    color: #555;
 }
